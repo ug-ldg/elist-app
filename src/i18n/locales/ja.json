@@ -1,0 +1,30 @@
+{
+  "login": {
+    "subtitle": "タスク管理",
+    "button": "Googleでサインイン"
+  },
+  "sidebar": {
+    "stats": "統計",
+    "total": "合計",
+    "pending": "保留中",
+    "in_progress": "進行中",
+    "done": "完了",
+    "folders": "フォルダー",
+    "logout": "ログアウト"
+  },
+  "tasks": {
+    "loading": "読み込み中...",
+    "new": "新しいタスク",
+    "delete": "削除",
+    "confirm_delete": "\"{{title}}\" を削除しますか？",
+    "create": "作成",
+    "cancel": "キャンセル",
+    "placeholder": "タスク名",
+    "modal_title": "新しいタスク",
+    "status": {
+      "pending": "保留中",
+      "in_progress": "進行中",
+      "done": "完了"
+    }
+  }
+}

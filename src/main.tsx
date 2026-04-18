@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import ProtectedRoute from './components/auth/ProtectedRoute'
 import LoginPage from './pages/LoginPage'
 import ExplorerPage from './pages/ExplorerPage'
+import './i18n'
+import 'flag-icons/css/flag-icons.min.css'
 import './index.css'
 
 const queryClient = new QueryClient()

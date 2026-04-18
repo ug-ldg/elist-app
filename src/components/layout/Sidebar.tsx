@@ -1,8 +1,11 @@
 import type { Stats } from '../../types/task'
 import { useAuth } from '../../hooks/useAuth'
+import { useTranslation } from 'react-i18next'
+import LanguageSelector from './LanguageSelector'
 
 export default function Sidebar({ stats, onHome }: { stats?: Stats; onHome: () => void }) {
   const { logout } = useAuth()
+  const { t } = useTranslation()
 
   return (
     <div className="w-56 bg-white border-r border-[#E5E5EA] flex flex-col p-6 gap-6">
@@ -11,16 +14,23 @@ export default function Sidebar({ stats, onHome }: { stats?: Stats; onHome: () =
         <span className="text-lg font-bold text-[#1C1C1E]">eList</span>
       </div>
 
+      <div className="flex flex-col gap-2">
+        <p className="text-[11px] font-semibold text-[#8E8E93] uppercase tracking-wide m-0">
+          Language
+        </p>
+        <LanguageSelector />
+      </div>
+
       {stats && (
         <div className="flex flex-col gap-2">
           <p className="text-[11px] font-semibold text-[#8E8E93] uppercase tracking-wide m-0">
-            Statistiques
+            {t('sidebar.stats')}
           </p>
-          <StatRow label="Total" value={stats.total_tasks} />
-          <StatRow label="En attente" value={stats.pending} color="text-[#8E8E93]" />
-          <StatRow label="En cours" value={stats.total_tasks - stats.pending - stats.done} color="text-[#007AFF]" />
-          <StatRow label="Terminées" value={stats.done} color="text-[#34C759]" />
-          <StatRow label="Dossiers" value={stats.root_tasks} />
+          <StatRow label={t('sidebar.total')} value={stats.total_tasks} />
+          <StatRow label={t('sidebar.pending')} value={stats.pending} color="text-[#8E8E93]" />
+          <StatRow label={t('sidebar.in_progress')} value={stats.total_tasks - stats.pending - stats.done} color="text-[#007AFF]" />
+          <StatRow label={t('sidebar.done')} value={stats.done} color="text-[#34C759]" />
+          <StatRow label={t('sidebar.folders')} value={stats.root_tasks} />
         </div>
       )}
 
@@ -29,7 +39,7 @@ export default function Sidebar({ stats, onHome }: { stats?: Stats; onHome: () =
           onClick={logout}
           className="w-full py-2.5 rounded-xl bg-[#F2F2F7] text-[#FF3B30] text-sm font-semibold cursor-pointer border-none"
         >
-          Déconnexion
+          {t('sidebar.logout')}
         </button>
       </div>
     </div>

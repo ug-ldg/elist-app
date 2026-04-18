@@ -2,9 +2,11 @@ import type { Task } from '../../types/task'
 import FileItem from './FileItem'
 import NewTaskModal from './NewTaskModal'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export default function FileGrid({ tasks, parentID }: { tasks: Task[]; parentID?: number }) {
   const [showModal, setShowModal] = useState(false)
+  const { t } = useTranslation()
 
   return (
     <div>
@@ -17,7 +19,7 @@ export default function FileGrid({ tasks, parentID }: { tasks: Task[]; parentID?
           className="bg-white rounded-xl p-4 cursor-pointer shadow-sm flex flex-col items-center justify-center gap-2 min-h-30 border-2 border-dashed border-[#E5E5EA] text-[#8E8E93] hover:border-[#007AFF] hover:text-[#007AFF] transition-colors"
         >
           <div className="text-3xl">+</div>
-          <div className="text-[13px]">Nouvelle tâche</div>
+          <div className="text-[13px]">{t('tasks.new')}</div>
         </div>
       </div>
       {showModal && (

@@ -1,0 +1,30 @@
+{
+  "login": {
+    "subtitle": "Gestor de tareas",
+    "button": "Iniciar sesión con Google"
+  },
+  "sidebar": {
+    "stats": "Estadísticas",
+    "total": "Total",
+    "pending": "Pendiente",
+    "in_progress": "En curso",
+    "done": "Completadas",
+    "folders": "Carpetas",
+    "logout": "Cerrar sesión"
+  },
+  "tasks": {
+    "loading": "Cargando...",
+    "new": "Nueva tarea",
+    "delete": "Eliminar",
+    "confirm_delete": "¿Eliminar \"{{title}}\" ?",
+    "create": "Crear",
+    "cancel": "Cancelar",
+    "placeholder": "Nombre de la tarea",
+    "modal_title": "Nueva tarea",
+    "status": {
+      "pending": "Pendiente",
+      "in_progress": "En curso",
+      "done": "Completado"
+    }
+  }
+}

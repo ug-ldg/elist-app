@@ -1,12 +1,7 @@
 import type { Task } from '../../types/task'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateStatus, useDeleteTask } from '../../hooks/useTasks'
-
-const statusLabels: Record<string, string> = {
-  pending: 'En attente',
-  in_progress: 'En cours',
-  done: 'Terminé',
-}
+import { useTranslation } from 'react-i18next'
 
 const statusColors: Record<string, string> = {
   pending: 'text-[#8E8E93]',
@@ -18,6 +13,7 @@ export default function FileItem({ task, hasChildren }: { task: Task; hasChildre
   const navigate = useNavigate()
   const updateStatus = useUpdateStatus()
   const deleteTask = useDeleteTask()
+  const { t } = useTranslation()
 
   function handleClick() {
     if (hasChildren) navigate(`/tasks/${task.id}`)
@@ -30,7 +26,7 @@ export default function FileItem({ task, hasChildren }: { task: Task; hasChildre
 
   function handleDelete(e: React.MouseEvent) {
     e.stopPropagation()
-    if (confirm(`Supprimer "${task.title}" ?`)) {
+    if (confirm(t('tasks.confirm_delete', { title: task.title }))) {
       deleteTask.mutate(task.id)
     }
   }
@@ -43,7 +39,7 @@ export default function FileItem({ task, hasChildren }: { task: Task; hasChildre
       <div className="text-3xl">{hasChildren ? '📁' : '📄'}</div>
       <div className="text-sm font-semibold text-[#1C1C1E]">{task.title}</div>
       <div className={`text-[11px] font-semibold ${statusColors[task.status]}`}>
-        {statusLabels[task.status]}
+        {t(`tasks.status.${task.status}`)}
       </div>
       <select
         value={task.status}
@@ -51,15 +47,15 @@ export default function FileItem({ task, hasChildren }: { task: Task; hasChildre
         onClick={e => e.stopPropagation()}
         className="text-xs border border-[#E5E5EA] rounded-lg p-1 text-[#1C1C1E] bg-[#F2F2F7]"
       >
-        <option value="pending">En attente</option>
-        <option value="in_progress">En cours</option>
-        <option value="done">Terminé</option>
+        <option value="pending">{t('tasks.status.pending')}</option>
+        <option value="in_progress">{t('tasks.status.in_progress')}</option>
+        <option value="done">{t('tasks.status.done')}</option>
       </select>
       <button
         onClick={handleDelete}
         className="text-xs rounded-lg py-1.5 bg-red-50 text-[#FF3B30] cursor-pointer border-none hover:bg-red-100 transition-colors"
       >
-        Supprimer
+        {t('tasks.delete')}
       </button>
     </div>
   )

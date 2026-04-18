@@ -1,0 +1,30 @@
+{
+  "login": {
+    "subtitle": "Task manager",
+    "button": "Sign in with Google"
+  },
+  "sidebar": {
+    "stats": "Statistics",
+    "total": "Total",
+    "pending": "Pending",
+    "in_progress": "In progress",
+    "done": "Done",
+    "folders": "Folders",
+    "logout": "Logout"
+  },
+  "tasks": {
+    "loading": "Loading...",
+    "new": "New task",
+    "delete": "Delete",
+    "confirm_delete": "Delete \"{{title}}\" ?",
+    "create": "Create",
+    "cancel": "Cancel",
+    "placeholder": "Task name",
+    "modal_title": "New task",
+    "status": {
+      "pending": "Pending",
+      "in_progress": "In progress",
+      "done": "Done"
+    }
+  }
+}

@@ -3,10 +3,12 @@ import { useChildren, useStats } from '../hooks/useTasks'
 import FileGrid from '../components/tasks/FileGrid'
 import Sidebar from '../components/layout/Sidebar'
 import Topbar from '../components/layout/Topbar'
+import { useTranslation } from 'react-i18next'
 
 export default function ExplorerPage() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const taskID = id ? parseInt(id) : undefined
   const { data: tasks, isLoading } = useChildren(taskID)
   const { data: stats } = useStats()
@@ -18,7 +20,7 @@ export default function ExplorerPage() {
         <Topbar parentID={taskID} />
         <main className="flex-1 p-6 overflow-y-auto">
           {isLoading ? (
-            <p className="text-[#8E8E93]">Chargement...</p>
+            <p className="text-[#8E8E93]">{t('tasks.loading')}</p>
           ) : (
             <FileGrid tasks={tasks ?? []} parentID={taskID} />
           )}

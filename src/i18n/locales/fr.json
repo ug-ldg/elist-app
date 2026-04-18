@@ -1,0 +1,30 @@
+{
+  "login": {
+    "subtitle": "Gestionnaire de tâches",
+    "button": "Se connecter avec Google"
+  },
+  "sidebar": {
+    "stats": "Statistiques",
+    "total": "Total",
+    "pending": "En attente",
+    "in_progress": "En cours",
+    "done": "Terminées",
+    "folders": "Dossiers",
+    "logout": "Déconnexion"
+  },
+  "tasks": {
+    "loading": "Chargement...",
+    "new": "Nouvelle tâche",
+    "delete": "Supprimer",
+    "confirm_delete": "Supprimer \"{{title}}\" ?",
+    "create": "Créer",
+    "cancel": "Annuler",
+    "placeholder": "Nom de la tâche",
+    "modal_title": "Nouvelle tâche",
+    "status": {
+      "pending": "En attente",
+      "in_progress": "En cours",
+      "done": "Terminé"
+    }
+  }
+}
