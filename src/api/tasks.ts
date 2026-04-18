@@ -19,5 +19,8 @@ export const deleteTask = (id: number) =>
 export const getRootTasks = () =>
   client.get<Task[]>('/tasks').then(r => r.data)
 
+export const getAncestors = (id: number) =>
+  client.get<{ id: number; title: string }[]>(`/tasks/${id}/ancestors`).then(r => r.data)
+
 export const getStats = () =>
   client.get<Stats>('/stats').then(r => r.data)
