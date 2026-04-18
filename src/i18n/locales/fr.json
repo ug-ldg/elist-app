@@ -21,6 +21,7 @@
     "cancel": "Annuler",
     "placeholder": "Nom de la tâche",
     "modal_title": "Nouvelle tâche",
+    "move_to_parent": "Déplacer vers le dossier parent",
     "status": {
       "pending": "En attente",
       "in_progress": "En cours",

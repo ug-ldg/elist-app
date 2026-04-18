@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { getChildren, getStats, createTask, updateStatus, deleteTask, getRootTasks } from '../api/tasks'
+import { getChildren, getStats, createTask, updateStatus, deleteTask, getRootTasks, updateParent } from '../api/tasks'
 
 export function useChildren(id?: number) {
   return useQuery({
@@ -45,6 +45,17 @@ export function useDeleteTask() {
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['tasks'] })
             queryClient.invalidateQueries({ queryKey: ['stats'] })
+        },
+    })
+}
+
+export function useUpdateParent() {
+    const queryClient = useQueryClient()
+    return useMutation({
+        mutationFn: ({ id, parent_id }: { id: number; parent_id: number | null }) =>
+            updateParent(id, parent_id),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['tasks'] })
         },
     })
 }

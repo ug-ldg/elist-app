@@ -21,6 +21,7 @@
     "cancel": "キャンセル",
     "placeholder": "タスク名",
     "modal_title": "新しいタスク",
+    "move_to_parent": "親フォルダーに移動",
     "status": {
       "pending": "保留中",
       "in_progress": "進行中",

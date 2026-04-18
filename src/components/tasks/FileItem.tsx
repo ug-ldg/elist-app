@@ -2,6 +2,7 @@ import type { Task } from '../../types/task'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateStatus, useDeleteTask } from '../../hooks/useTasks'
 import { useTranslation } from 'react-i18next'
+import { useDraggable, useDroppable } from '@dnd-kit/core'
 
 const statusColors: Record<string, string> = {
   pending: 'text-[#8E8E93]',
@@ -15,8 +16,11 @@ export default function FileItem({ task, hasChildren }: { task: Task; hasChildre
   const deleteTask = useDeleteTask()
   const { t } = useTranslation()
 
+  const { attributes, listeners, setNodeRef: setDragRef, isDragging } = useDraggable({ id: task.id })
+  const { setNodeRef: setDropRef, isOver } = useDroppable({ id: task.id })
+
   function handleClick() {
-    if (hasChildren) navigate(`/tasks/${task.id}`)
+    if (!isDragging && hasChildren) navigate(`/tasks/${task.id}`)
   }
 
   function handleStatusChange(e: React.ChangeEvent<HTMLSelectElement>) {
@@ -33,8 +37,14 @@ export default function FileItem({ task, hasChildren }: { task: Task; hasChildre
 
   return (
     <div
+      ref={node => { setDragRef(node); setDropRef(node) }}
       onClick={handleClick}
-      className="bg-white rounded-xl p-4 shadow-sm flex flex-col gap-2 transition-transform duration-150 ease-in-out hover:scale-[1.02] cursor-pointer"
+      className={`bg-white rounded-xl p-4 shadow-sm flex flex-col gap-2 transition-all duration-150 cursor-pointer active:cursor-grabbing
+        ${isDragging ? 'opacity-40 scale-95' : 'hover:scale-[1.02]'}
+        ${isOver ? 'ring-2 ring-[#007AFF]' : ''}
+      `}
+      {...attributes}
+      {...listeners}
     >
       <div className="text-3xl">{hasChildren ? '📁' : '📄'}</div>
       <div className="text-sm font-semibold text-[#1C1C1E]">{task.title}</div>

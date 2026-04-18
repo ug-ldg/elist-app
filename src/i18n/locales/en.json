@@ -21,6 +21,7 @@
     "cancel": "Cancel",
     "placeholder": "Task name",
     "modal_title": "New task",
+    "move_to_parent": "Move to parent folder",
     "status": {
       "pending": "Pending",
       "in_progress": "In progress",

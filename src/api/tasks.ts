@@ -19,6 +19,9 @@ export const deleteTask = (id: number) =>
 export const getRootTasks = () =>
   client.get<Task[]>('/tasks').then(r => r.data)
 
+export const updateParent = (id: number, parent_id: number | null) =>
+  client.patch<Task>(`/tasks/${id}/parent`, { parent_id }).then(r => r.data)
+
 export const getAncestors = (id: number) =>
   client.get<{ id: number; title: string }[]>(`/tasks/${id}/ancestors`).then(r => r.data)
 

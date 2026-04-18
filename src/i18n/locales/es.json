@@ -21,6 +21,7 @@
     "cancel": "Cancelar",
     "placeholder": "Nombre de la tarea",
     "modal_title": "Nueva tarea",
+    "move_to_parent": "Mover a la carpeta padre",
     "status": {
       "pending": "Pendiente",
       "in_progress": "En curso",
