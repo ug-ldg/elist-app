@@ -1,8 +1,8 @@
 import client from './client'
 import type { Task, Stats } from '../types/task'
 
-export const createTask = (title: string, parent_id?: number) =>
-  client.post<Task>('/tasks', { title, parent_id }).then(r => r.data)
+export const createTask = (title: string, parent_id?: number, note?: string | null, icon?: string) =>
+  client.post<Task>('/tasks', { title, parent_id, note, icon }).then(r => r.data)
 
 export const getTask = (id: number) =>
   client.get<Task>(`/tasks/${id}`).then(r => r.data)
@@ -12,6 +12,9 @@ export const getChildren = (id: number) =>
 
 export const updateStatus = (id: number, status: string) =>
   client.patch<Task>(`/tasks/${id}/status`, { status }).then(r => r.data)
+
+export const updateTask = (id: number, payload: { title: string; status: string; note?: string | null; icon: string }) =>
+  client.patch<Task>(`/tasks/${id}`, payload).then(r => r.data)
 
 export const deleteTask = (id: number) =>
   client.delete(`/tasks/${id}`)

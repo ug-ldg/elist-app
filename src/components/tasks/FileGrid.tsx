@@ -68,7 +68,7 @@ export default function FileGrid({ tasks, parentID }: { tasks: Task[]; parentID?
     <DndContext sensors={sensors} collisionDetection={pointerWithin} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
       <div>
         {parentID && <ParentDropZone />}
-        <div className="grid gap-4" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))' }}>
+        <div className="grid gap-4" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))' }}>
           {tasks.map(task => (
             <FileItem key={task.id} task={task} hasChildren={true} />
           ))}

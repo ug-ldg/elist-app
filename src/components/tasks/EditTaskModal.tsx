@@ -1,21 +1,23 @@
 import { useState } from 'react'
-import { useCreateTask } from '../../hooks/useTasks'
+import { useUpdateTask } from '../../hooks/useTasks'
 import { useTranslation } from 'react-i18next'
+import type { Task } from '../../types/task'
 
 const ICONS = ['📁', '📋', '⭐', '🔥', '💡', '🎯', '🚀', '✅', '📌', '🏷️', '📝', '🔧', '🎨', '📊', '🗓️', '💼', '🔑', '🎵', '🏠', '🛒']
 
-export default function NewTaskModal({ parentID, onClose }: { parentID?: number; onClose: () => void }) {
-  const [title, setTitle] = useState('')
-  const [note, setNote] = useState('')
-  const [icon, setIcon] = useState('📁')
-  const createTask = useCreateTask()
+export default function EditTaskModal({ task, onClose }: { task: Task; onClose: () => void }) {
+  const [title, setTitle] = useState(task.title)
+  const [status, setStatus] = useState(task.status)
+  const [note, setNote] = useState(task.note ?? '')
+  const [icon, setIcon] = useState(task.icon)
+  const updateTask = useUpdateTask()
   const { t } = useTranslation()
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (!title.trim()) return
-    createTask.mutate(
-      { title: title.trim(), parent_id: parentID, note: note.trim() || null, icon },
+    updateTask.mutate(
+      { id: task.id, title: title.trim(), status, note: note.trim() || null, icon },
       { onSuccess: onClose },
     )
   }
@@ -23,7 +25,7 @@ export default function NewTaskModal({ parentID, onClose }: { parentID?: number;
   return (
     <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
       <div className="bg-white rounded-2xl p-8 w-96 shadow-2xl">
-        <h2 className="text-lg font-semibold text-[#1C1C1E] mb-5">{t('tasks.modal_title')}</h2>
+        <h2 className="text-lg font-semibold text-[#1C1C1E] mb-5">{t('tasks.modal_edit_title')}</h2>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
 
           <div>
@@ -51,6 +53,16 @@ export default function NewTaskModal({ parentID, onClose }: { parentID?: number;
             className="px-3 py-3 rounded-xl border border-[#E5E5EA] text-sm outline-none focus:border-[#007AFF] transition-colors"
           />
 
+          <select
+            value={status}
+            onChange={e => setStatus(e.target.value as Task['status'])}
+            className="px-3 py-3 rounded-xl border border-[#E5E5EA] text-sm outline-none focus:border-[#007AFF] bg-white transition-colors"
+          >
+            <option value="pending">{t('tasks.status.pending')}</option>
+            <option value="in_progress">{t('tasks.status.in_progress')}</option>
+            <option value="done">{t('tasks.status.done')}</option>
+          </select>
+
           <textarea
             value={note}
             onChange={e => setNote(e.target.value)}
@@ -61,9 +73,10 @@ export default function NewTaskModal({ parentID, onClose }: { parentID?: number;
 
           <button
             type="submit"
-            className="bg-[#007AFF] text-white border-none rounded-xl py-3 text-sm font-semibold cursor-pointer hover:bg-blue-600 transition-colors"
+            disabled={updateTask.isPending}
+            className="bg-[#007AFF] text-white border-none rounded-xl py-3 text-sm font-semibold cursor-pointer hover:bg-blue-600 transition-colors disabled:opacity-50"
           >
-            {t('tasks.create')}
+            {t('tasks.save')}
           </button>
           <button
             type="button"

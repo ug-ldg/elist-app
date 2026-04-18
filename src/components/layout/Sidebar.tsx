@@ -2,10 +2,12 @@ import type { Stats } from '../../types/task'
 import { useAuth } from '../../hooks/useAuth'
 import { useTranslation } from 'react-i18next'
 import LanguageSelector from './LanguageSelector'
+import { useDisplayPreferences } from '../../hooks/useDisplayPreferences'
 
 export default function Sidebar({ stats, onHome }: { stats?: Stats; onHome: () => void }) {
   const { logout } = useAuth()
   const { t } = useTranslation()
+  const { prefs, toggle } = useDisplayPreferences()
 
   return (
     <div className="w-56 bg-white border-r border-[#E5E5EA] flex flex-col p-6 gap-6">
@@ -34,6 +36,35 @@ export default function Sidebar({ stats, onHome }: { stats?: Stats; onHome: () =
         </div>
       )}
 
+      <div className="flex flex-col gap-3">
+        <p className="text-[11px] font-semibold text-[#8E8E93] uppercase tracking-wide m-0">
+          {t('sidebar.options')}
+        </p>
+        <div className="flex flex-col gap-2">
+          <p className="text-[11px] font-semibold text-[#3A3A3C] m-0">{t('sidebar.display')}</p>
+          <ToggleRow
+            label={t('sidebar.show_icon')}
+            checked={prefs.showIcon}
+            onChange={() => toggle('showIcon')}
+          />
+          <ToggleRow
+            label={t('sidebar.show_status')}
+            checked={prefs.showStatus}
+            onChange={() => toggle('showStatus')}
+          />
+          <ToggleRow
+            label={t('sidebar.show_created_at')}
+            checked={prefs.showCreatedAt}
+            onChange={() => toggle('showCreatedAt')}
+          />
+          <ToggleRow
+            label={t('sidebar.show_updated_at')}
+            checked={prefs.showUpdatedAt}
+            onChange={() => toggle('showUpdatedAt')}
+          />
+        </div>
+      </div>
+
       <div className="mt-auto">
         <button
           onClick={logout}
@@ -51,6 +82,20 @@ function StatRow({ label, value, color = 'text-[#1C1C1E]' }: { label: string; va
     <div className="flex justify-between items-center">
       <span className="text-[13px] text-[#3A3A3C]">{label}</span>
       <span className={`text-[13px] font-semibold ${color}`}>{value}</span>
+    </div>
+  )
+}
+
+function ToggleRow({ label, checked, onChange }: { label: string; checked: boolean; onChange: () => void }) {
+  return (
+    <div className="flex justify-between items-center">
+      <span className="text-[13px] text-[#3A3A3C]">{label}</span>
+      <button
+        onClick={onChange}
+        className={`w-9 h-5 rounded-full transition-colors cursor-pointer border-none relative ${checked ? 'bg-[#007AFF]' : 'bg-[#E5E5EA]'}`}
+      >
+        <span className={`absolute top-0.5 w-4 h-4 rounded-full bg-white shadow-sm transition-all ${checked ? 'left-4' : 'left-0.5'}`} />
+      </button>
     </div>
   )
 }

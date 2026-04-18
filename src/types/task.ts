@@ -6,6 +6,8 @@ export interface Task {
   title: string
   parent_id?: number
   status: Status
+  note?: string
+  icon: string
   created_at: string
   updated_at: string
 }

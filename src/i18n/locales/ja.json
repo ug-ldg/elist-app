@@ -10,7 +10,13 @@
     "in_progress": "進行中",
     "done": "完了",
     "folders": "フォルダー",
-    "logout": "ログアウト"
+    "logout": "ログアウト",
+    "options": "オプション",
+    "display": "表示",
+    "show_created_at": "作成日",
+    "show_updated_at": "更新日",
+    "show_status": "ステータス",
+    "show_icon": "アイコン"
   },
   "tasks": {
     "loading": "読み込み中...",
@@ -19,8 +25,15 @@
     "confirm_delete": "\"{{title}}\" を削除しますか？",
     "create": "作成",
     "cancel": "キャンセル",
+    "save": "保存",
+    "edit": "編集",
     "placeholder": "タスク名",
     "modal_title": "新しいタスク",
+    "modal_edit_title": "タスクを編集",
+    "note_placeholder": "メモを追加...",
+    "icon": "アイコン",
+    "created_at": "作成日：",
+    "updated_at": "更新日：",
     "move_to_parent": "親フォルダーに移動",
     "status": {
       "pending": "保留中",

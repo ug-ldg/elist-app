@@ -10,7 +10,13 @@
     "in_progress": "En curso",
     "done": "Completadas",
     "folders": "Carpetas",
-    "logout": "Cerrar sesión"
+    "logout": "Cerrar sesión",
+    "options": "Opciones",
+    "display": "Visualización",
+    "show_created_at": "Fecha de creación",
+    "show_updated_at": "Fecha de modificación",
+    "show_status": "Estado",
+    "show_icon": "Icono"
   },
   "tasks": {
     "loading": "Cargando...",
@@ -19,8 +25,15 @@
     "confirm_delete": "¿Eliminar \"{{title}}\" ?",
     "create": "Crear",
     "cancel": "Cancelar",
+    "save": "Guardar",
+    "edit": "Editar",
     "placeholder": "Nombre de la tarea",
     "modal_title": "Nueva tarea",
+    "modal_edit_title": "Editar tarea",
+    "note_placeholder": "Agregar una nota...",
+    "icon": "Icono",
+    "created_at": "Creado:",
+    "updated_at": "Modificado:",
     "move_to_parent": "Mover a la carpeta padre",
     "status": {
       "pending": "Pendiente",

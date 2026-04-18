@@ -10,7 +10,13 @@
     "in_progress": "En cours",
     "done": "Terminées",
     "folders": "Dossiers",
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "options": "Options",
+    "display": "Affichage",
+    "show_created_at": "Date de création",
+    "show_updated_at": "Date de modification",
+    "show_status": "Statut",
+    "show_icon": "Icône"
   },
   "tasks": {
     "loading": "Chargement...",
@@ -19,8 +25,15 @@
     "confirm_delete": "Supprimer \"{{title}}\" ?",
     "create": "Créer",
     "cancel": "Annuler",
+    "save": "Enregistrer",
+    "edit": "Modifier",
     "placeholder": "Nom de la tâche",
     "modal_title": "Nouvelle tâche",
+    "modal_edit_title": "Modifier la tâche",
+    "note_placeholder": "Ajouter une note...",
+    "icon": "Icône",
+    "created_at": "Créé le :",
+    "updated_at": "Modifié le :",
     "move_to_parent": "Déplacer vers le dossier parent",
     "status": {
       "pending": "En attente",

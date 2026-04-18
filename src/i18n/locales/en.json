@@ -10,7 +10,13 @@
     "in_progress": "In progress",
     "done": "Done",
     "folders": "Folders",
-    "logout": "Logout"
+    "logout": "Logout",
+    "options": "Options",
+    "display": "Display",
+    "show_created_at": "Created date",
+    "show_updated_at": "Modified date",
+    "show_status": "Status",
+    "show_icon": "Icon"
   },
   "tasks": {
     "loading": "Loading...",
@@ -19,8 +25,15 @@
     "confirm_delete": "Delete \"{{title}}\" ?",
     "create": "Create",
     "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
     "placeholder": "Task name",
     "modal_title": "New task",
+    "modal_edit_title": "Edit task",
+    "note_placeholder": "Add a note...",
+    "icon": "Icon",
+    "created_at": "Created:",
+    "updated_at": "Updated:",
     "move_to_parent": "Move to parent folder",
     "status": {
       "pending": "Pending",

@@ -23,12 +23,13 @@ useChildren(id)     → GET /tasks or GET /tasks/{id}/children
 useStats()          → GET /stats
 useCreateTask()     → POST /tasks                  → invalidates task list + stats
 useUpdateStatus()   → PATCH /tasks/{id}/status     → invalidates task list + stats
+useUpdateTask()     → PATCH /tasks/{id}            → invalidates task list
 useDeleteTask()     → DELETE /tasks/{id}           → invalidates task list + stats
 useUpdateParent()   → PATCH /tasks/{id}/parent     → invalidates task list
 ```
 
 ### JWT Authentication Flow
-1. User clicks "Se connecter avec Google" → redirected to the API's OAuth endpoint
+1. User clicks "Sign in with Google" → redirected to the API's OAuth endpoint
 2. API handles Google OAuth and redirects back with `?token=<jwt>`
 3. Token is captured from URL params, stored in `localStorage`
 4. Axios interceptor attaches `Authorization: Bearer <token>` to every request
@@ -38,13 +39,14 @@ useUpdateParent()   → PATCH /tasks/{id}/parent     → invalidates task list
 Tasks map to filesystem concepts:
 | API concept | UI representation |
 |---|---|
-| Root task | Folder (📁) |
-| Subtask | File (📄) |
+| Root task | Folder |
 | Navigate into task | Open folder |
-| Breadcrumb | Current path in hierarchy |
-| `status: pending` | Grey label |
-| `status: in_progress` | Blue label |
-| `status: done` | Green label |
+| Breadcrumb | Current path in hierarchy (max 5 levels visible) |
+| `status: pending` | Grey dot |
+| `status: in_progress` | Orange dot |
+| `status: done` | Green dot |
+
+Each task card displays: customizable icon, title (truncated at 50 chars), status indicator, creation and modification dates, edit and delete actions.
 
 ### Internationalization (i18n)
 The UI supports 4 languages switchable at runtime via a flag dropdown in the sidebar:
@@ -67,6 +69,11 @@ Tasks can be reorganized by dragging cards onto each other or onto a "move to pa
 - A **drag overlay** follows the cursor during the drag for visual feedback
 - Uses `pointerWithin` collision detection to avoid false positives from adjacent cards
 
+### Display Preferences
+A sidebar "Options > Display" panel lets users toggle card fields on/off:
+- Icon, status indicator, creation date, modification date
+- Preferences are persisted to `localStorage` and synced across all cards in real time via a module-level pub/sub pattern (no context provider needed)
+
 ### Environment-based Configuration
 All URLs are driven by environment variables — no hardcoded `localhost` in the source code:
 
@@ -82,31 +89,34 @@ Vite only exposes variables prefixed with `VITE_` to the client bundle. Switchin
 ```
 src/
 ├── api/
-│   ├── client.ts         # Axios instance + JWT interceptor
-│   └── tasks.ts          # API functions (createTask, getChildren, etc.)
+│   ├── client.ts               # Axios instance + JWT interceptor
+│   └── tasks.ts                # API functions (createTask, updateTask, etc.)
 ├── components/
 │   ├── auth/
 │   │   └── ProtectedRoute.tsx
 │   ├── layout/
-│   │   ├── Sidebar.tsx         # Stats panel + language selector + logout
-│   │   ├── Topbar.tsx          # Breadcrumb navigation
+│   │   ├── Sidebar.tsx         # Stats + language selector + display options + logout
+│   │   ├── Topbar.tsx          # Breadcrumb (max 5 levels, truncated at 25 chars)
 │   │   └── LanguageSelector.tsx # Flag dropdown, persisted to localStorage
 │   └── tasks/
-│       ├── FileGrid.tsx  # Task grid + drag context + drag overlay
-│       ├── FileItem.tsx  # Individual task card (draggable + droppable)
-│       └── NewTaskModal.tsx
+│       ├── FileGrid.tsx        # Task grid + drag context + drag overlay
+│       ├── FileItem.tsx        # Task card (draggable + droppable)
+│       ├── NewTaskModal.tsx    # Create task (title, note, icon)
+│       ├── EditTaskModal.tsx   # Edit task (title, status, note, icon)
+│       └── DeleteTaskModal.tsx # Delete confirmation modal
 ├── hooks/
-│   ├── useAuth.ts        # JWT read/write helpers
-│   └── useTasks.ts       # TanStack Query hooks (includes useUpdateParent)
+│   ├── useAuth.ts              # JWT read/write helpers
+│   ├── useTasks.ts             # TanStack Query hooks
+│   └── useDisplayPreferences.ts # Display toggles persisted to localStorage
 ├── i18n/
-│   ├── index.ts          # i18next config
-│   └── locales/          # en.json, fr.json, es.json, ja.json
+│   ├── index.ts                # i18next config
+│   └── locales/                # en.json, fr.json, es.json, ja.json
 ├── pages/
-│   ├── LoginPage.tsx     # Google OAuth entry point
-│   └── ExplorerPage.tsx  # Main file manager view
+│   ├── LoginPage.tsx           # Google OAuth entry point
+│   └── ExplorerPage.tsx        # Main file manager view
 ├── types/
-│   └── task.ts           # TypeScript interfaces (Task, TaskNode, Stats)
-└── main.tsx              # Router + QueryClient setup
+│   └── task.ts                 # TypeScript interfaces (Task, TaskNode, Stats)
+└── main.tsx                    # Router + QueryClient setup
 ```
 
 ## Getting Started
