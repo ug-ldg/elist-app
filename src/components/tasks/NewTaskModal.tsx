@@ -12,57 +12,28 @@ export default function NewTaskModal({ parentID, onClose }: { parentID?: number;
   }
 
   return (
-    <div style={{
-      position: 'fixed', inset: 0,
-      backgroundColor: 'rgba(0,0,0,0.3)',
-      display: 'flex', alignItems: 'center', justifyContent: 'center',
-      zIndex: 100,
-    }}>
-      <div style={{
-        backgroundColor: '#FFFFFF',
-        borderRadius: '16px',
-        padding: '32px',
-        width: '320px',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
-      }}>
-        <h2 style={{ margin: '0 0 20px', fontSize: '18px', color: '#1C1C1E' }}>
-          Nouvelle tâche
-        </h2>
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+    <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
+      <div className="bg-white rounded-2xl p-8 w-80 shadow-2xl">
+        <h2 className="text-lg font-semibold text-[#1C1C1E] mb-5">Nouvelle tâche</h2>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <input
             autoFocus
             value={title}
             onChange={e => setTitle(e.target.value)}
             placeholder="Nom de la tâche"
-            style={{
-              padding: '12px',
-              borderRadius: '10px',
-              border: '1px solid #E5E5EA',
-              fontSize: '15px',
-              outline: 'none',
-            }}
+            className="px-3 py-3 rounded-xl border border-[#E5E5EA] text-sm outline-none focus:border-[#007AFF] transition-colors"
           />
-          <button type="submit" style={{
-            backgroundColor: '#007AFF',
-            color: '#FFFFFF',
-            border: 'none',
-            borderRadius: '10px',
-            padding: '12px',
-            fontSize: '15px',
-            fontWeight: 600,
-            cursor: 'pointer',
-          }}>
+          <button
+            type="submit"
+            className="bg-[#007AFF] text-white border-none rounded-xl py-3 text-sm font-semibold cursor-pointer hover:bg-blue-600 transition-colors"
+          >
             Créer
           </button>
-          <button type="button" onClick={onClose} style={{
-            backgroundColor: '#F2F2F7',
-            color: '#1C1C1E',
-            border: 'none',
-            borderRadius: '10px',
-            padding: '12px',
-            fontSize: '15px',
-            cursor: 'pointer',
-          }}>
+          <button
+            type="button"
+            onClick={onClose}
+            className="bg-[#F2F2F7] text-[#1C1C1E] border-none rounded-xl py-3 text-sm cursor-pointer hover:bg-gray-200 transition-colors"
+          >
             Annuler
           </button>
         </form>

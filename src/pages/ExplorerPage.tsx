@@ -12,18 +12,13 @@ export default function ExplorerPage() {
   const { data: stats } = useStats()
 
   return (
-    <div style={{
-      display: 'flex',
-      height: '100vh',
-      backgroundColor: '#F2F2F7',
-      fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif',
-    }}>
+    <div className="flex h-screen bg-[#F2F2F7] font-sans">
       <Sidebar stats={stats} onHome={() => navigate('/')} />
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+      <div className="flex flex-1 flex-col overflow-hidden">
         <Topbar parentID={taskID} />
-        <main style={{ flex: 1, padding: '24px', overflowY: 'auto' }}>
+        <main className="flex-1 p-6 overflow-y-auto">
           {isLoading ? (
-            <p style={{ color: '#8E8E93' }}>Chargement...</p>
+            <p className="text-[#8E8E93]">Chargement...</p>
           ) : (
             <FileGrid tasks={tasks ?? []} parentID={taskID} />
           )}
